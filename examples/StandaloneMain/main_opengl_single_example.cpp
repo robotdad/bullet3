@@ -26,6 +26,8 @@ subject to the following restrictions:
 #include <stdio.h>
 #include "../ExampleBrowser/OpenGLGuiHelper.h"
 
+using namespace std::chrono_literals;
+
 CommonExampleInterface*    example;
 int gSharedMemoryKey=-1;
 
@@ -67,6 +69,21 @@ public:
 	{
 	}
 };
+
+constexpr int factorial(int x) {
+	if (x > 1)
+		return x * factorial(x - 1);
+	else
+		return x;
+}
+
+constexpr int SECONDS_TO_WAIT = factorial(3);
+#ifndef IN_GTEST
+constexpr int SECONDS_TO_EXIT = factorial(4);
+#else
+constexpr int SECONDS_TO_EXIT = factorial(2);
+#endif
+
 int main(int argc, char* argv[])
 {
 	
@@ -113,7 +130,7 @@ int main(int argc, char* argv[])
 		
 		app->swapBuffer();
 	} while (!app->m_window->requestedExit());
-
+	Sleep(3000);
 	example->exitPhysics();
 	delete example;
 	delete app;
