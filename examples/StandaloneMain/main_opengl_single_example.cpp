@@ -130,7 +130,7 @@ int main(int argc, char* argv[])
 		
 		app->swapBuffer();
 	} while (!app->m_window->requestedExit());
-	Sleep(3000);
+	
 	example->exitPhysics();
 	delete example;
 	delete app;
